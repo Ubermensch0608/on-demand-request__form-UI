@@ -2,6 +2,7 @@ import React, { FC } from "react";
 
 import { Button, Toggle } from "components/UI";
 import styled from "styled-components";
+import FilterDropDown from "./FilterDropDown";
 
 const FilterActions: FC<{ onCheckToggle: (isChecked: boolean) => void }> = (
   props
@@ -9,8 +10,7 @@ const FilterActions: FC<{ onCheckToggle: (isChecked: boolean) => void }> = (
   return (
     <FiltersWrapper>
       <FilterLeft>
-        <Button>가공방식</Button>
-        <Button>재료</Button>
+        <FilterDropDown />
       </FilterLeft>
       <FilterRight>
         <Toggle id="on-counsle" onCheckToggle={props.onCheckToggle} />

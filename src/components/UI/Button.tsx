@@ -1,8 +1,17 @@
-import React, { FC } from "react";
+import React, { FC, FocusEventHandler } from "react";
 import styled, { css } from "styled-components";
 
-const Button: FC<{ theme?: string }> = ({ children, theme }) => {
-  return <StyledButton theme={theme}>{children}</StyledButton>;
+export interface ButtonProps {
+  theme: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+}
+
+const Button: FC<ButtonProps> = ({ children, theme, onClick }) => {
+  return (
+    <StyledButton onClick={onClick} theme={theme}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export const StyledButton = styled.button<{ theme: string }>`
@@ -24,6 +33,21 @@ export const StyledButton = styled.button<{ theme: string }>`
         outline: 1px solid #2196f3;
         color: #2196f3;
         background: transparent;
+      `) ||
+    (props.theme === "clear" &&
+      css`
+        outline: 1px solid #939fa5;
+        color: #323d45;
+        background: transparent;
+        :hover {
+          outline: 2px solid #2196f3;
+        }
+
+        :focus {
+          color: #fff;
+          background-color: #1565c0;
+          outline: 1px solid #1565c0;
+        }
       `)};
 `;
 
