@@ -14,7 +14,6 @@ const Home = () => {
     setIsToggled(!isChecked);
   };
 
-  console.log(isToggled);
   const filteredRequests = isToggled
     ? requests.filter((request) => request.status === "상담중")
     : requests;

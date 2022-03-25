@@ -1,30 +1,41 @@
-import React, { FocusEventHandler, useState } from "react";
+import React, { ChangeEvent, FocusEventHandler, useState } from "react";
 
 import { DUMMY_MATERIAL, DUMMY_METHOD } from "common/dummy-data";
 import { Button } from "components/UI";
 
 import ArrowDownIcon from "assets/img/arrow_drop_down_24px.png";
 import styled from "styled-components";
+import { RootState } from "store/store";
+import { ThrowStatement } from "typescript";
 
 const FilterDropDown = () => {
   const [isMethodFocused, setIsMethodFocused] = useState(false);
   const [isMaterialFocused, setIsMaterialFocused] = useState(false);
 
-  const methodCheckHandler = () => {
-    setIsMethodFocused((prev) => !prev);
+  const [checkList, setCheckList] = useState<string[]>([]);
 
-    if (isMaterialFocused) {
-      setIsMethodFocused(false);
-    }
+  const methodCheckHandler = () => {
+    setIsMaterialFocused(false);
+    setIsMethodFocused((prev) => !prev);
   };
 
   const materialCheckHandler = () => {
+    setIsMethodFocused(false);
     setIsMaterialFocused((prev) => !prev);
+  };
 
-    if (isMethodFocused) {
-      setIsMaterialFocused(false);
+  const countCheckHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const currentisChecked = event.target.checked;
+    const checkedValue = event.target.value;
+    if (currentisChecked) {
+      setCheckList((prevState) => [...prevState, checkedValue]);
+    } else {
+      setCheckList((prevState) =>
+        prevState.filter((item) => item !== checkedValue)
+      );
     }
   };
+
   return (
     <FilterWrapper>
       <span>
@@ -46,7 +57,15 @@ const FilterDropDown = () => {
             {DUMMY_METHOD.map((item) => (
               <li key={item.id}>
                 <span>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    onChange={countCheckHandler}
+                    value={item.method}
+                    checked={
+                      item.method ===
+                      checkList.find((check) => check === item.method)
+                    }
+                  />
                 </span>
                 <span>{item.method}</span>
               </li>
@@ -73,7 +92,15 @@ const FilterDropDown = () => {
             {DUMMY_MATERIAL.map((item) => (
               <li key={item.id}>
                 <span>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    onChange={countCheckHandler}
+                    value={item.material}
+                    checked={
+                      item.material ===
+                      checkList.find((check) => check === item.material)
+                    }
+                  />
                 </span>
                 <span>{item.material}</span>
               </li>
@@ -89,7 +116,7 @@ export const FilterWrapper = styled.span`
   display: flex;
 
   > span > * {
-    margin-bottom: 10px;
+    margin-bottom: 4px;
   }
 
   > span:nth-child(1) {
@@ -107,12 +134,15 @@ export const ButtonInner = styled.div`
 `;
 
 export const DropDownWrapper = styled.ul`
+  position: absolute;
+  z-index: 99;
+  background-color: #fff;
   border: 1px solid #939fa5;
   border-radius: 4px;
   padding: 17px 12px;
-
   font-size: 14px;
   line-height: 20px;
+  min-width: 90px;
 `;
 
 export default FilterDropDown;
