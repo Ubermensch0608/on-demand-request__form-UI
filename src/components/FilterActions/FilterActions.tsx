@@ -1,18 +1,20 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { Button, Toggle } from "components/UI";
 import styled from "styled-components";
 
-const FilterActions = () => {
+const FilterActions: FC<{ onCheckToggle: (isChecked: boolean) => void }> = (
+  props
+) => {
   return (
     <FiltersWrapper>
       <FilterLeft>
-        <Button></Button>
-        <Button></Button>
+        <Button>가공방식</Button>
+        <Button>재료</Button>
       </FilterLeft>
       <FilterRight>
-        <Toggle id="on-counsle" />
-        <div>상담 중인 요청만 보기</div>
+        <Toggle id="on-counsle" onCheckToggle={props.onCheckToggle} />
+        <ToggleDesc>상담 중인 요청만 보기</ToggleDesc>
       </FilterRight>
     </FiltersWrapper>
   );
@@ -21,6 +23,7 @@ const FilterActions = () => {
 export const FiltersWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 32px 0;
 `;
 
 export const FilterLeft = styled.div`
@@ -29,8 +32,16 @@ export const FilterLeft = styled.div`
 
 export const FilterRight = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const DropDown = styled(Button)``;
+
+export const ToggleDesc = styled.div`
+  margin-left: 16px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #323d45;
+`;
 
 export default FilterActions;

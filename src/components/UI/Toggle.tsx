@@ -1,21 +1,25 @@
-import React, { FC, useRef, useState } from "react";
+import React, { FC, Fragment, useState } from "react";
 import styled from "styled-components";
 
-const Toggle: FC<{ id: string }> = ({ id }) => {
+const Toggle: FC<{
+  id: string;
+  onCheckToggle: (isChecked: boolean) => void;
+}> = ({ id, onCheckToggle }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const filterCounselHandler = () => {
     setIsChecked((prev) => !prev);
+    onCheckToggle(isChecked);
   };
 
   return (
-    <form>
+    <Fragment>
       <div onClick={filterCounselHandler}>
         <Overlay htmlFor={id} isChecked={isChecked} />
         <Slider isChecked={isChecked} />
       </div>
       <CheckBox id={id} type="checkbox" />
-    </form>
+    </Fragment>
   );
 };
 
@@ -27,8 +31,8 @@ const Overlay = styled.label<{ isChecked: boolean }>`
   border-radius: 50%;
   background-color: ${(props) => (props.isChecked ? `#2196F3` : `#f5f5f5`)};
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
   transition: transform 0.4s ease;
-
   transform: ${(props) =>
     props.isChecked
       ? `translate3d(15px, -3.5px ,0)`
@@ -41,6 +45,7 @@ const Slider = styled.div<{ isChecked: boolean }>`
   background-color: ${(props) => (props.isChecked ? `#BBDEFB` : `#c2c2c2`)};
   border: none;
   border-radius: 15px;
+  cursor: pointer;
 `;
 
 const CheckBox = styled.input`

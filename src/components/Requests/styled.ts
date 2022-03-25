@@ -16,6 +16,10 @@ export const RequestForm = styled.li`
 
 export const ButtonActions = styled.div`
   margin-top: 32px;
+
+  > button:nth-child(1) {
+    margin-right: 10px;
+  }
 `;
 
 export const RequestCard = styled(Card)`

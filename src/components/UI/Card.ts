@@ -8,4 +8,9 @@ export const Card = styled.div`
   padding: 24px 16px;
   margin-right: 16px;
   margin-bottom: 16px;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid #2196f3;
+  }
 `;
