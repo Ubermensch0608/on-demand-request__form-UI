@@ -53,6 +53,7 @@ const Home = () => {
 
 export const HomeWrapper = styled.section`
   position: absolute;
+  z-index: 99;
   width: 100%;
   margin: 110px 155px 60px 155px;
 `;

@@ -31,6 +31,7 @@ const GNB = () => {
 
 export const NavWrapper = styled.header`
   position: fixed;
+  z-index: 100;
   display: flex;
   align-items: center;
   height: 70px;
@@ -54,6 +55,7 @@ export const MainNav = styled.nav`
 export const CAPALogo = styled.img`
   width: 153px;
   height: 20px;
+  cursor: pointer;
 `;
 
 export const NavRightContents = styled.div`
@@ -68,9 +70,11 @@ export const NavRightContents = styled.div`
   }
 
   > div > span {
+    cursor: pointer;
+
     :nth-child(2) {
       content: " ";
-
+      cursor: none;
       background-color: #fff;
       width: 1px;
       height: 16px;
