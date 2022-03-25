@@ -27,4 +27,4 @@ export const StyledButton = styled.button<{ theme: string }>`
       `)};
 `;
 
-export default Button;
+export { Button };
