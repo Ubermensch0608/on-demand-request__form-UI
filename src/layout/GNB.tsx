@@ -48,8 +48,12 @@ export const MainNav = styled.nav`
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: auto 40px;
+
+  @media (width > 1440px) {
+    margin: auto;
+  }
 `;
 
 export const CAPALogo = styled.img`
