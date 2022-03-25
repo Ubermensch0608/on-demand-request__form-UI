@@ -1,7 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
+import axios from "axios";
+
+import GNB from "layout/GNB";
 
 import GlobalStyle from "common/GlobalStyle";
-import axios from "axios";
 
 const App = () => {
   const [data, setData] = useState();
@@ -20,7 +22,7 @@ const App = () => {
   return (
     <Fragment>
       <GlobalStyle />
-      Noto Sans 적용 폰트
+      <GNB />
     </Fragment>
   );
 };
