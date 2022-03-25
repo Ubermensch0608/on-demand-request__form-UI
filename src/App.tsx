@@ -4,6 +4,7 @@ import axios from "axios";
 import GNB from "layout/GNB";
 
 import GlobalStyle from "common/GlobalStyle";
+import Home from "components/Home";
 
 const App = () => {
   const [data, setData] = useState();
@@ -23,6 +24,7 @@ const App = () => {
     <Fragment>
       <GlobalStyle />
       <GNB />
+      <Home />
     </Fragment>
   );
 };
