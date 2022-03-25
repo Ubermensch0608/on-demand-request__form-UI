@@ -5,20 +5,10 @@ import GNB from "layout/GNB";
 
 import GlobalStyle from "common/GlobalStyle";
 import Home from "components/Home";
+import useFetch from "hooks/useFetch";
 
 const App = () => {
-  const [data, setData] = useState();
-
-  const getData = async () => {
-    const response = await axios.get("http://localhost:4000/requests");
-    console.log(response.data);
-    setData(response.data);
-    return response.data;
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
+  const data = useFetch("http://localhost:4000/requests");
 
   return (
     <Fragment>
