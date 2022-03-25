@@ -1,14 +1,24 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import axios from "axios";
+import { requestsActions } from "store";
+import { useAppDispatch } from "store/hooks";
 
 import GNB from "layout/GNB";
+import Home from "components/Home";
 
 import GlobalStyle from "common/GlobalStyle";
-import Home from "components/Home";
-import useFetch from "hooks/useFetch";
 
 const App = () => {
-  const data = useFetch("http://localhost:4000/requests");
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get("http://localhost:4000/requests");
+      const data = response.data;
+
+      dispatch(requestsActions.fetchRequest(data));
+    })();
+  }, []);
 
   return (
     <Fragment>
