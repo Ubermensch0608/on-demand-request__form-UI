@@ -3,15 +3,18 @@ import HomeDescription from "./HomeDescription/HomeDescription";
 import styled from "styled-components";
 import { useAppSelector } from "store/hooks";
 import Requests from "./Requests/Requests";
+import FilterActions from "./FilterActions/FilterActions";
 
 const Home = () => {
   const requests = useAppSelector((state) => state.requests.requests);
 
   return (
     <HomeWrapper>
-      <HomeDescription />
-      <div>필터</div>
-      <Requests requests={requests} />
+      <InnerContents>
+        <HomeDescription />
+        <FilterActions />
+        <Requests requests={requests} />
+      </InnerContents>
     </HomeWrapper>
   );
 };
@@ -23,6 +26,10 @@ export const HomeWrapper = styled.section`
   z-index: 99;
   width: 100%;
   margin: 0 auto;
+`;
+
+export const InnerContents = styled.div`
+  margin: 0 120px; ;
 `;
 
 export default Home;
