@@ -1,41 +1,56 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 
 import MenuIcon from "assets/img/menu_icon_24px.png";
 import MainLogo from "assets/img/main-logo.png";
 import CompanyIcon from "assets/img/company-icon.png";
 
 import styled from "styled-components";
+import Modal from "./Modal";
 
 const GNB = () => {
-  const openDashBoardHandler = () => {
-    console.log("open");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openDashBoardHandler = (event: React.MouseEvent) => {
+    setIsModalOpen(true);
+  };
+
+  const closeModalHandler = () => {
+    setIsModalOpen(false);
   };
 
   return (
-    <NavWrapper>
-      <MainNav>
-        <div>
-          <MenuBtn onClick={openDashBoardHandler}>
-            <img src={MenuIcon} alt="menu-icon" width={24} height={24} />
-          </MenuBtn>
-        </div>
-        <div>
-          <span>
-            <CAPALogo src={MainLogo} alt="main-logo" />
-          </span>
-        </div>
-        <NavRightContents>
+    <Fragment>
+      {isModalOpen && <Modal onModal={closeModalHandler} />}
+      <NavWrapper>
+        <MainNav>
           <div>
-            <img src={CompanyIcon} alt="company-icon" width={16} height={15} />
+            <MenuBtn onClick={openDashBoardHandler}>
+              <img src={MenuIcon} alt="menu-icon" width={24} height={24} />
+            </MenuBtn>
           </div>
           <div>
-            <span>A 가공 업체</span>
-            <span> </span>
-            <span>로그아웃</span>
+            <span>
+              <CAPALogo src={MainLogo} alt="main-logo" />
+            </span>
           </div>
-        </NavRightContents>
-      </MainNav>
-    </NavWrapper>
+          <NavRightContents>
+            <div>
+              <img
+                src={CompanyIcon}
+                alt="company-icon"
+                width={16}
+                height={15}
+              />
+            </div>
+            <div>
+              <span>A 가공 업체</span>
+              <span> </span>
+              <span>로그아웃</span>
+            </div>
+          </NavRightContents>
+        </MainNav>
+      </NavWrapper>
+    </Fragment>
   );
 };
 
