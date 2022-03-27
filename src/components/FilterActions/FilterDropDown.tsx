@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
 
-import { filterActions } from "store";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { DUMMY_MATERIAL, DUMMY_METHOD } from "common/dummy-data";
 import { Button } from "components/UI";
@@ -8,12 +7,16 @@ import { Button } from "components/UI";
 import RefreshIcon from "assets/img/refresh_24px.png";
 import ArrowDownIcon from "assets/img/arrow_drop_down_24px.png";
 import styled from "styled-components";
+import { checkfilterActions } from "store";
+
+export const CHECKED_LIST = "checkedli";
 
 const FilterDropDown = () => {
   const dispatch = useAppDispatch();
   const [isMethodFocused, setIsMethodFocused] = useState(false);
   const [isMaterialFocused, setIsMaterialFocused] = useState(false);
-  const checkedList = useAppSelector((state) => state.filter.checkedBoxList);
+  const methodList = useAppSelector((state) => state.filter.methodList);
+  const materialList = useAppSelector((state) => state.filter.materialList);
 
   const methodCheckHandler = () => {
     setIsMaterialFocused(false);
@@ -29,14 +32,14 @@ const FilterDropDown = () => {
     const currentisChecked = event.target.checked;
     const checkedValue = event.target.value;
     if (currentisChecked) {
-      dispatch(filterActions.checked(checkedValue));
+      dispatch(checkfilterActions.checked(checkedValue));
     } else {
-      dispatch(filterActions.unChecked(checkedValue));
+      dispatch(checkfilterActions.unChecked(checkedValue));
     }
   };
 
   const checkResetHandler = () => {
-    dispatch(filterActions.reset());
+    dispatch(checkfilterActions.reset());
   };
 
   return (
@@ -66,7 +69,7 @@ const FilterDropDown = () => {
                     value={item.method}
                     checked={
                       item.method ===
-                      checkedList.find((check) => check === item.method)
+                      methodList.find((check) => check === item.method)
                     }
                   />
                 </span>
@@ -79,7 +82,9 @@ const FilterDropDown = () => {
       <span>
         <Button theme="clear" onClick={materialCheckHandler}>
           <ButtonInner>
-            <span>재료</span>
+            <span>
+              재료{materialList.length > 0 && "(" + materialList.length + ")"}
+            </span>
             <span>
               <img
                 src={ArrowDownIcon}
@@ -101,7 +106,7 @@ const FilterDropDown = () => {
                     value={item.material}
                     checked={
                       item.material ===
-                      checkedList.find((check) => check === item.material)
+                      materialList.find((check) => check === item.material)
                     }
                   />
                 </span>
@@ -111,7 +116,7 @@ const FilterDropDown = () => {
           </DropDownWrapper>
         )}
       </span>
-      {checkedList.length > 0 && (
+      {methodList.length + materialList.length > 0 && (
         <FilterResetBtn>
           <Button theme="refresh" onClick={checkResetHandler}>
             <img src={RefreshIcon} alt="refresh-icon" width={16} height={16} />

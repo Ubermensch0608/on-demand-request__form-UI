@@ -1,10 +1,10 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { filtertSlice, requestSlice } from "store";
+import { checkFilterSlice, requestSlice } from "store";
 
 export const store = configureStore({
   reducer: {
     requests: requestSlice.reducer,
-    filter: filtertSlice.reducer,
+    filter: checkFilterSlice.reducer,
   },
 });
 

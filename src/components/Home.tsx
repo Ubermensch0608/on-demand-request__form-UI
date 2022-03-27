@@ -9,7 +9,8 @@ import { RequestState } from "store";
 
 const Home = () => {
   const [isToggled, setIsToggled] = useState(false);
-  const checkedBoxList = useAppSelector((state) => state.filter.checkedBoxList);
+  const methodList = useAppSelector((state) => state.filter.methodList);
+  const materialList = useAppSelector((state) => state.filter.materialList);
   const requests = useAppSelector((state) => state.requests.requests);
 
   let filteredRequests = requests;
@@ -27,17 +28,9 @@ const Home = () => {
   };
 
   let methodfilteredRequests = requests.filter((request) => {
-    let methodList;
-
-    methodList =
-      request.method.find(
-        (element) => element === checkedBoxList.find((item) => item === element)
-      ) ||
-      request.material.find(
-        (element) => element === checkedBoxList.find((item) => item === element)
-      );
-
-    return methodList;
+    return request.method.find(
+      (element) => element === methodList.find((item) => item === element)
+    );
   });
 
   return (

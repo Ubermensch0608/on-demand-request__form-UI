@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { stat } from "fs";
 
 export interface RequestState {
   id: number;
@@ -30,31 +31,38 @@ export const requestSlice = createSlice({
   },
 });
 
-export interface FilterState {
-  checkedBoxList: string[];
+export interface checkFilterState {
+  methodList: string[];
+  materialList: string[];
 }
 
-const filterInitialState: FilterState = {
-  checkedBoxList: [],
+const checkFilterInitialState: checkFilterState = {
+  methodList: [],
+  materialList: [],
 };
 
-export const filtertSlice = createSlice({
-  name: "filter",
-  initialState: filterInitialState,
+export const checkFilterSlice = createSlice({
+  name: "check_box_filter",
+  initialState: checkFilterInitialState,
   reducers: {
     checked: (state, action: PayloadAction<string>) => {
-      state.checkedBoxList = [...state.checkedBoxList, action.payload];
+      state.methodList = [...state.methodList, action.payload];
+      state.materialList = [...state.materialList, action.payload];
     },
     unChecked: (state, action: PayloadAction<string>) => {
-      state.checkedBoxList = [
-        ...state.checkedBoxList.filter((item) => item !== action.payload),
+      state.methodList = [
+        ...state.methodList.filter((item) => item !== action.payload),
+      ];
+      state.materialList = [
+        ...state.materialList.filter((item) => item !== action.payload),
       ];
     },
     reset: (state) => {
-      state.checkedBoxList = [];
+      state.methodList = [];
+      state.materialList = [];
     },
   },
 });
 
 export const requestsActions = requestSlice.actions;
-export const filterActions = filtertSlice.actions;
+export const checkfilterActions = checkFilterSlice.actions;
