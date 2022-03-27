@@ -7,6 +7,7 @@ import GNB from "layout/GNB";
 import Home from "components/Home";
 
 import GlobalStyle from "common/GlobalStyle";
+import styled from "styled-components";
 
 const App = () => {
   const dispatch = useAppDispatch();

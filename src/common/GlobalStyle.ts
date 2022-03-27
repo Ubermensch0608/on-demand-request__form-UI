@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background: #fff;
     font-family: 'Noto Sans KR', sans-serif;
+    width: 100%;
     max-width:1440px;
   }
     

@@ -26,6 +26,14 @@ export const FiltersWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 32px 0;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+
+    > div:nth-child(1) {
+      margin-bottom: 10px;
+    }
+  }
 `;
 
 export const FilterLeft = styled.div`

@@ -7,11 +7,17 @@ import CompanyIcon from "assets/img/company-icon.png";
 import styled from "styled-components";
 
 const GNB = () => {
+  const openDashBoardHandler = () => {
+    console.log("open");
+  };
+
   return (
     <NavWrapper>
       <MainNav>
         <div>
-          <img src={MenuIcon} alt="menu-icon" width={24} height={24} />
+          <MenuBtn onClick={openDashBoardHandler}>
+            <img src={MenuIcon} alt="menu-icon" width={24} height={24} />
+          </MenuBtn>
         </div>
         <div>
           <span>
@@ -111,8 +117,18 @@ export const NavRightContents = styled.div`
       background-color: #fff;
       width: 1px;
       height: 16px;
-      margin: 0 32px;
     }
   }
 `;
+
+export const MenuBtn = styled.button`
+  border: none;
+  cursor: pointer;
+  background-color: inherit;
+
+  width: 24px;
+  height: 24px;
+  padding: 0;
+`;
+
 export default GNB;

@@ -73,10 +73,20 @@ export const HomeWrapper = styled.section`
   z-index: 99;
   width: 100%;
   margin: 0 auto;
+
+  @media (min-width: 1439px) {
+    max-width: max-content;
+  }
 `;
 
 export const InnerContents = styled.div`
-  margin: 110px 120px; ;
+  display: flex;
+  flex-direction: column;
+  margin: 110px 120px;
+
+  @media (max-width: 767px) {
+    margin: 76px 20px 38px 20px;
+  }
 `;
 
 export default Home;
