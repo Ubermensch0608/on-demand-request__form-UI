@@ -19,6 +19,32 @@ const Home = () => {
     setIsToggled(!isChecked);
   };
 
+  filteredRequests = requests.filter((request) => {
+    let filterResult;
+
+    if (methodList.length > 0 && materialList.length > 0) {
+      filterResult =
+        request.method.find(
+          (element) => element === methodList.find((item) => item === element)
+        ) &&
+        request.material.find(
+          (element) => element === materialList.find((item) => item === element)
+        );
+    } else if (methodList.length > 0 && materialList.length === 0) {
+      filterResult = request.method.find(
+        (element) => element === methodList.find((item) => item === element)
+      );
+    } else if (methodList.length === 0 && materialList.length > 0) {
+      filterResult = request.material.find(
+        (element) => element === materialList.find((item) => item === element)
+      );
+    } else if (methodList.length === 0 && materialList.length === 0) {
+      filterResult = requests;
+    }
+
+    return filterResult;
+  });
+
   const toggleFilterHandler = (currentRequests: RequestState[]) => {
     const returnRequests = isToggled
       ? currentRequests.filter((request) => request.status === "상담중")
@@ -27,18 +53,14 @@ const Home = () => {
     return returnRequests;
   };
 
-  let methodfilteredRequests = requests.filter((request) => {
-    return request.method.find(
-      (element) => element === methodList.find((item) => item === element)
-    );
-  });
+  filteredRequests = toggleFilterHandler(filteredRequests);
 
   return (
     <HomeWrapper>
       <InnerContents>
         <HomeDescription />
         <FilterActions onCheckToggle={toggleCheckHandler} />
-        <Requests requests={methodfilteredRequests} />
+        <Requests requests={filteredRequests} />
       </InnerContents>
     </HomeWrapper>
   );

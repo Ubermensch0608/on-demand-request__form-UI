@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useState } from "react";
 
+import { checkfilterActions } from "store";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { DUMMY_MATERIAL, DUMMY_METHOD } from "common/dummy-data";
 import { Button } from "components/UI";
+import { DUMMY_MATERIAL, DUMMY_METHOD } from "common/dummy-data";
 
 import RefreshIcon from "assets/img/refresh_24px.png";
 import ArrowDownIcon from "assets/img/arrow_drop_down_24px.png";
 import styled from "styled-components";
-import { checkfilterActions } from "store";
 
 export const CHECKED_LIST = "checkedli";
 
@@ -31,6 +31,7 @@ const FilterDropDown = () => {
   const countCheckHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const currentisChecked = event.target.checked;
     const checkedValue = event.target.value;
+
     if (currentisChecked) {
       dispatch(checkfilterActions.checked(checkedValue));
     } else {

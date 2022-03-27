@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { stat } from "fs";
+import { DUMMY_MATERIAL, DUMMY_METHOD } from "common/dummy-data";
 
 export interface RequestState {
   id: number;
@@ -46,9 +46,19 @@ export const checkFilterSlice = createSlice({
   initialState: checkFilterInitialState,
   reducers: {
     checked: (state, action: PayloadAction<string>) => {
-      state.methodList = [...state.methodList, action.payload];
-      state.materialList = [...state.materialList, action.payload];
+      state.methodList = DUMMY_METHOD.find(
+        (method) => method.method === action.payload
+      )
+        ? [...state.methodList, action.payload]
+        : state.methodList;
+
+      state.materialList = DUMMY_MATERIAL.find(
+        (material) => material.material === action.payload
+      )
+        ? [...state.materialList, action.payload]
+        : state.materialList;
     },
+
     unChecked: (state, action: PayloadAction<string>) => {
       state.methodList = [
         ...state.methodList.filter((item) => item !== action.payload),
