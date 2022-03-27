@@ -30,4 +30,28 @@ export const requestSlice = createSlice({
   },
 });
 
+export interface FilterState {
+  checkedBoxList: string[];
+}
+
+const filterInitialState: FilterState = {
+  checkedBoxList: [],
+};
+
+export const filtertSlice = createSlice({
+  name: "filter",
+  initialState: filterInitialState,
+  reducers: {
+    checked: (state, action: PayloadAction<string>) => {
+      state.checkedBoxList = [...state.checkedBoxList, action.payload];
+    },
+    unChecked: (state, action: PayloadAction<string>) => {
+      state.checkedBoxList = [
+        ...state.checkedBoxList.filter((item) => item !== action.payload),
+      ];
+    },
+  },
+});
+
 export const requestsActions = requestSlice.actions;
+export const filterActions = filtertSlice.actions;

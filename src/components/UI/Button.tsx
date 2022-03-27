@@ -1,4 +1,4 @@
-import React, { FC, FocusEventHandler } from "react";
+import React, { FC } from "react";
 import styled, { css } from "styled-components";
 
 export interface ButtonProps {

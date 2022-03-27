@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomeDescription from "./HomeDescription/HomeDescription";
 import { useAppSelector } from "store/hooks";
 import Requests from "./Requests/Requests";
@@ -8,15 +8,18 @@ import styled from "styled-components";
 
 const Home = () => {
   const [isToggled, setIsToggled] = useState(false);
+  const checkedBoxList = useAppSelector((state) => state.filter.checkedBoxList);
   const requests = useAppSelector((state) => state.requests.requests);
 
   const toggleCheckHandler = (isChecked: boolean) => {
     setIsToggled(!isChecked);
   };
 
-  const filteredRequests = isToggled
+  let filteredRequests = isToggled
     ? requests.filter((request) => request.status === "상담중")
     : requests;
+
+  // filteredRequests = requests.filter(request=>request)
 
   return (
     <HomeWrapper>

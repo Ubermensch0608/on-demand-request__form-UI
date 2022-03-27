@@ -4,16 +4,18 @@ import { Button, Toggle } from "components/UI";
 import styled from "styled-components";
 import FilterDropDown from "./FilterDropDown";
 
-const FilterActions: FC<{ onCheckToggle: (isChecked: boolean) => void }> = (
-  props
-) => {
+export interface FilterActionsProp {
+  onCheckToggle: (isChecked: boolean) => void;
+}
+
+const FilterActions: FC<FilterActionsProp> = ({ onCheckToggle }) => {
   return (
     <FiltersWrapper>
       <FilterLeft>
         <FilterDropDown />
       </FilterLeft>
       <FilterRight>
-        <Toggle id="on-counsle" onCheckToggle={props.onCheckToggle} />
+        <Toggle id="on-counsle" onCheckToggle={onCheckToggle} />
         <ToggleDesc>상담 중인 요청만 보기</ToggleDesc>
       </FilterRight>
     </FiltersWrapper>

@@ -1,18 +1,18 @@
-import React, { ChangeEvent, FocusEventHandler, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 import { DUMMY_MATERIAL, DUMMY_METHOD } from "common/dummy-data";
 import { Button } from "components/UI";
 
 import ArrowDownIcon from "assets/img/arrow_drop_down_24px.png";
 import styled from "styled-components";
-import { RootState } from "store/store";
-import { ThrowStatement } from "typescript";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { filterActions } from "store";
 
 const FilterDropDown = () => {
+  const dispatch = useAppDispatch();
   const [isMethodFocused, setIsMethodFocused] = useState(false);
   const [isMaterialFocused, setIsMaterialFocused] = useState(false);
-
-  const [checkList, setCheckList] = useState<string[]>([]);
+  const checkedList = useAppSelector((state) => state.filter.checkedBoxList);
 
   const methodCheckHandler = () => {
     setIsMaterialFocused(false);
@@ -28,11 +28,9 @@ const FilterDropDown = () => {
     const currentisChecked = event.target.checked;
     const checkedValue = event.target.value;
     if (currentisChecked) {
-      setCheckList((prevState) => [...prevState, checkedValue]);
+      dispatch(filterActions.checked(checkedValue));
     } else {
-      setCheckList((prevState) =>
-        prevState.filter((item) => item !== checkedValue)
-      );
+      dispatch(filterActions.unChecked(checkedValue));
     }
   };
 
@@ -63,7 +61,7 @@ const FilterDropDown = () => {
                     value={item.method}
                     checked={
                       item.method ===
-                      checkList.find((check) => check === item.method)
+                      checkedList.find((check) => check === item.method)
                     }
                   />
                 </span>
@@ -98,7 +96,7 @@ const FilterDropDown = () => {
                     value={item.material}
                     checked={
                       item.material ===
-                      checkList.find((check) => check === item.material)
+                      checkedList.find((check) => check === item.material)
                     }
                   />
                 </span>
