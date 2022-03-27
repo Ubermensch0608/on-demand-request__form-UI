@@ -19,7 +19,15 @@ const Home = () => {
     ? requests.filter((request) => request.status === "상담중")
     : requests;
 
-  // filteredRequests = requests.filter(request=>request)
+  filteredRequests = requests.filter((request) => {
+    const isContained = request.material.find(
+      (element) => element === checkedBoxList.find((item) => item === element)
+    );
+
+    if (isContained) {
+      return isContained;
+    }
+  });
 
   return (
     <HomeWrapper>

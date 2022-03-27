@@ -11,7 +11,7 @@ export const DUMMY_METHOD = [
 export const DUMMY_MATERIAL = [
   {
     id: "material_1",
-    material: "알류미늄",
+    material: "알루미늄",
   },
   {
     id: "material_2",
