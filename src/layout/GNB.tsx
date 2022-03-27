@@ -1,5 +1,6 @@
 import React from "react";
 
+import MenuIcon from "assets/img/menu_icon_24px.png";
 import MainLogo from "assets/img/main-logo.png";
 import CompanyIcon from "assets/img/company-icon.png";
 
@@ -9,6 +10,9 @@ const GNB = () => {
   return (
     <NavWrapper>
       <MainNav>
+        <div>
+          <img src={MenuIcon} alt="menu-icon" width={24} height={24} />
+        </div>
         <div>
           <span>
             <CAPALogo src={MainLogo} alt="main-logo" />
@@ -39,7 +43,7 @@ export const NavWrapper = styled.header`
   background-color: #1565c0;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 
-  @media (width < 768px) {
+  @media (max-width: 768px) {
     height: 44px;
   }
 `;
@@ -48,11 +52,27 @@ export const MainNav = styled.nav`
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: auto 40px;
 
-  @media (width > 1440px) {
+  @media (min-width: 1439px) {
     margin: auto;
+    max-width: 1330px;
+  }
+
+  @media (max-width: 767px) {
+    display: flex;
+    justify-content: left;
+    margin: auto 20px;
+  }
+
+  > div:nth-child(1) {
+    display: none;
+    margin-right: 10px;
+
+    @media (max-width: 767px) {
+      display: inline-block;
+    }
   }
 `;
 
@@ -60,6 +80,11 @@ export const CAPALogo = styled.img`
   width: 153px;
   height: 20px;
   cursor: pointer;
+
+  @media (max-width: 767px) {
+    width: 92px;
+    height: 12px;
+  }
 `;
 
 export const NavRightContents = styled.div`
@@ -68,6 +93,10 @@ export const NavRightContents = styled.div`
   color: #fff;
   font-weight: 500;
   font-size: 14px;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 
   > div:nth-child(1) {
     margin-right: 8px;

@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background: #fff;
     font-family: 'Noto Sans KR', sans-serif;
+    max-width:1440px;
   }
     
 `;
