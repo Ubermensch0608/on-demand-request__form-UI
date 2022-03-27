@@ -39,7 +39,7 @@ export const BackDrop = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   z-index: 10;
   background: rgba(0, 0, 0, 0.75);
 `;
@@ -65,6 +65,17 @@ export const ModalWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+  transition: 0.3s;
+
+  animation: 0.3s ease-in slide-to-right;
+  @keyframes slide-to-right {
+    from {
+      transform: translateX(-200px);
+    }
+    to {
+      transform: translateX(0px);
+    }
+  }
 `;
 
 export const ModalInnerContents = styled.div`
