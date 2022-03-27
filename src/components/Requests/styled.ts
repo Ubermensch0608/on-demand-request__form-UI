@@ -96,3 +96,14 @@ export const OnCounsle = styled.div`
   font-weight: 500;
   line-height: 20px;
 `;
+
+export const NoRequestBox = styled(Card)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  border: 1px solid #c2c2c2;
+  color: #939fa5;
+  font-size: 14px;
+  font-weight: 400;
+`;

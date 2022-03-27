@@ -5,6 +5,10 @@ import { Button } from "components/UI";
 import * as S from "./styled";
 
 const Requests: FC<{ requests: RequestState[] }> = ({ requests }) => {
+  if (requests.length === 0) {
+    return <S.NoRequestBox>조건에 맞는 요청이 없습니다.</S.NoRequestBox>;
+  }
+
   return (
     <S.RequestForms>
       {requests.map((request) => {

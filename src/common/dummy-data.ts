@@ -8,6 +8,7 @@ export const DUMMY_METHOD = [
     method: "선반",
   },
 ];
+
 export const DUMMY_MATERIAL = [
   {
     id: "material_1",

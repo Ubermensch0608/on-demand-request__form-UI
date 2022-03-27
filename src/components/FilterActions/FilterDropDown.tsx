@@ -1,12 +1,13 @@
 import React, { ChangeEvent, useState } from "react";
 
+import { filterActions } from "store";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import { DUMMY_MATERIAL, DUMMY_METHOD } from "common/dummy-data";
 import { Button } from "components/UI";
 
+import RefreshIcon from "assets/img/refresh_24px.png";
 import ArrowDownIcon from "assets/img/arrow_drop_down_24px.png";
 import styled from "styled-components";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { filterActions } from "store";
 
 const FilterDropDown = () => {
   const dispatch = useAppDispatch();
@@ -32,6 +33,10 @@ const FilterDropDown = () => {
     } else {
       dispatch(filterActions.unChecked(checkedValue));
     }
+  };
+
+  const checkResetHandler = () => {
+    dispatch(filterActions.reset());
   };
 
   return (
@@ -106,6 +111,14 @@ const FilterDropDown = () => {
           </DropDownWrapper>
         )}
       </span>
+      {checkedList.length > 0 && (
+        <FilterResetBtn>
+          <Button theme="refresh" onClick={checkResetHandler}>
+            <img src={RefreshIcon} alt="refresh-icon" width={16} height={16} />
+            <span>필러링 리셋</span>
+          </Button>
+        </FilterResetBtn>
+      )}
     </FilterWrapper>
   );
 };
@@ -141,6 +154,23 @@ export const DropDownWrapper = styled.ul`
   font-size: 14px;
   line-height: 20px;
   min-width: 90px;
+`;
+
+export const FilterResetBtn = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+
+  > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  > button > span {
+    padding-left: 12px;
+  }
 `;
 
 export default FilterDropDown;

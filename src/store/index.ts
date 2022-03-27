@@ -50,6 +50,9 @@ export const filtertSlice = createSlice({
         ...state.checkedBoxList.filter((item) => item !== action.payload),
       ];
     },
+    reset: (state) => {
+      state.checkedBoxList = [];
+    },
   },
 });
 

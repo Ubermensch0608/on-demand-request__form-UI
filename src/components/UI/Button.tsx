@@ -25,6 +25,7 @@ export const StyledButton = styled.button<{ theme: string }>`
   ${(props) =>
     (props.theme === "blue" &&
       css`
+        outline: 1px solid #2196f3;
         color: #fff;
         background: #2196f3;
       `) ||
@@ -48,6 +49,14 @@ export const StyledButton = styled.button<{ theme: string }>`
           background-color: #1565c0;
           outline: 1px solid #1565c0;
         }
+      `) ||
+    (props.theme === "refresh" &&
+      css`
+        outline: 1px solid none;
+        color: #2196f3;
+        background: transparent;
+        font-size: 12px;
+        font-weight: 400;
       `)};
 `;
 

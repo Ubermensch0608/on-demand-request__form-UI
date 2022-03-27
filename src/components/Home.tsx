@@ -1,32 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import HomeDescription from "./HomeDescription/HomeDescription";
 import { useAppSelector } from "store/hooks";
 import Requests from "./Requests/Requests";
 import FilterActions from "./FilterActions/FilterActions";
 
 import styled from "styled-components";
+import { RequestState } from "store";
 
 const Home = () => {
   const [isToggled, setIsToggled] = useState(false);
   const checkedBoxList = useAppSelector((state) => state.filter.checkedBoxList);
   const requests = useAppSelector((state) => state.requests.requests);
 
+  let filteredRequests = requests;
+
   const toggleCheckHandler = (isChecked: boolean) => {
     setIsToggled(!isChecked);
   };
 
-  let filteredRequests = isToggled
-    ? requests.filter((request) => request.status === "상담중")
-    : requests;
+  const toggleFilterHandler = (currentRequests: RequestState[]) => {
+    const returnRequests = isToggled
+      ? currentRequests.filter((request) => request.status === "상담중")
+      : currentRequests;
 
-  filteredRequests = requests.filter((request) => {
-    const isContained = request.material.find(
-      (element) => element === checkedBoxList.find((item) => item === element)
-    );
+    return returnRequests;
+  };
 
-    if (isContained) {
-      return isContained;
-    }
+  let methodfilteredRequests = requests.filter((request) => {
+    let methodList;
+
+    methodList =
+      request.method.find(
+        (element) => element === checkedBoxList.find((item) => item === element)
+      ) ||
+      request.material.find(
+        (element) => element === checkedBoxList.find((item) => item === element)
+      );
+
+    return methodList;
   });
 
   return (
@@ -34,7 +45,7 @@ const Home = () => {
       <InnerContents>
         <HomeDescription />
         <FilterActions onCheckToggle={toggleCheckHandler} />
-        <Requests requests={filteredRequests} />
+        <Requests requests={methodfilteredRequests} />
       </InnerContents>
     </HomeWrapper>
   );
