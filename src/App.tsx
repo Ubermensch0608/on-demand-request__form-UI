@@ -12,7 +12,7 @@ const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const url = "http://localhost:3001/requests";
+    const url = "/requests";
 
     (async () => {
       const response = await axios.get<RequestState[]>(url);
