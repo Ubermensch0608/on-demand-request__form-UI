@@ -4,11 +4,12 @@ import styled, { css } from "styled-components";
 export interface ButtonProps {
   theme: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  btnRef?: React.Ref<HTMLButtonElement>;
 }
 
-const Button: FC<ButtonProps> = ({ children, theme, onClick }) => {
+const Button: FC<ButtonProps> = ({ children, theme, onClick, btnRef }) => {
   return (
-    <StyledButton onClick={onClick} theme={theme}>
+    <StyledButton onClick={onClick} ref={btnRef} theme={theme}>
       {children}
     </StyledButton>
   );

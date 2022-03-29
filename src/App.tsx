@@ -12,13 +12,12 @@ const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const url = "/requests";
+    const url = "http://localhost:3001/requests";
 
     (async () => {
       const response = await axios.get<RequestState[]>(url);
       const data = response.data;
 
-      console.log(data);
       dispatch(requestsActions.fetchRequest(data));
     })();
   }, []);

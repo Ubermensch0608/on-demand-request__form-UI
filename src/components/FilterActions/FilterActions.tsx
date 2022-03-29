@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 
-import { Button, Toggle } from "components/UI";
-import styled from "styled-components";
+import { Toggle } from "components/UI";
 import FilterDropDown from "./FilterDropDown";
+import * as S from "./styled/filter-actions";
 
 export interface FilterActionsProp {
   onCheckToggle: (isChecked: boolean) => void;
@@ -10,48 +10,16 @@ export interface FilterActionsProp {
 
 const FilterActions: FC<FilterActionsProp> = ({ onCheckToggle }) => {
   return (
-    <FiltersWrapper>
-      <FilterLeft>
+    <S.FiltersWrapper>
+      <S.FilterLeft>
         <FilterDropDown />
-      </FilterLeft>
-      <FilterRight>
+      </S.FilterLeft>
+      <S.FilterRight>
         <Toggle id="on-counsle" onCheckToggle={onCheckToggle} />
-        <ToggleDesc>상담 중인 요청만 보기</ToggleDesc>
-      </FilterRight>
-    </FiltersWrapper>
+        <S.ToggleDesc>상담 중인 요청만 보기</S.ToggleDesc>
+      </S.FilterRight>
+    </S.FiltersWrapper>
   );
 };
-
-export const FiltersWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 32px 0;
-
-  @media (max-width: 767px) {
-    flex-direction: column;
-
-    > div:nth-child(1) {
-      margin-bottom: 10px;
-    }
-  }
-`;
-
-export const FilterLeft = styled.div`
-  display: flex;
-`;
-
-export const FilterRight = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const DropDown = styled(Button)``;
-
-export const ToggleDesc = styled.div`
-  margin-left: 16px;
-  font-size: 14px;
-  line-height: 20px;
-  color: #323d45;
-`;
 
 export default FilterActions;
