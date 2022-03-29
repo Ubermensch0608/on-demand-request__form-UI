@@ -2,7 +2,7 @@ import jsonServer from "json-server";
 import path from "path";
 
 const server = jsonServer.create();
-const router = jsonServer.router(path.resolve(__dirname + "/requests.json"));
+const router = jsonServer.router(path.resolve(__dirname + "requests.json"));
 const middlewares = jsonServer.defaults({
   static: path.resolve(__dirname + "/../build/"),
 });
