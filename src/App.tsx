@@ -13,9 +13,7 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get(
-        "https://request-form-rewind.herokuapp.com/requests"
-      );
+      const response = await axios.get("/requests");
       const data = response.data;
 
       dispatch(requestsActions.fetchRequest(data));
