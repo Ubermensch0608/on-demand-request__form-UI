@@ -27,6 +27,7 @@
     "start": "node server",
     "start:dev": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
+    "mockserver": "json-server ./src/utils/data.json --port 4000",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "heroku-postbuild": "cross-env NODE_PATH=src yarn run build"
