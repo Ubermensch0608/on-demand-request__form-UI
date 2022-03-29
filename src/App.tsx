@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import axios from "axios";
-import { requestsActions } from "store";
+import { requestsActions, RequestState } from "store";
 import { useAppDispatch } from "store/hooks";
 
 import GNB from "layout/GNB";
@@ -13,9 +13,10 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get("/requests");
+      const response = await axios.get<RequestState[]>("/requests");
       const data = response.data;
 
+      console.log(data);
       dispatch(requestsActions.fetchRequest(data));
     })();
   }, []);

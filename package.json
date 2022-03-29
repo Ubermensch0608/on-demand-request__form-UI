@@ -30,7 +30,8 @@
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "cross-env NODE_PATH=src npm run build"
+    "heroku-postbuild": "cross-env NODE_PATH=src yarn run build",
+    "server": "json-server --watch server/requests.json --port 4000"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,5 +48,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://request-form-rewind.herokuapp.com/"
+  "proxy": "https://request-form-rewind.herokuapp.com"
 }

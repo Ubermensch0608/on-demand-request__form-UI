@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import HomeDescription from "./HomeDescription/HomeDescription";
+import { RequestState } from "store";
 import { useAppSelector } from "store/hooks";
-import Requests from "./Requests/Requests";
 import FilterActions from "./FilterActions/FilterActions";
 
+import HomeDescription from "./HomeDescription/HomeDescription";
+import Requests from "./Requests/Requests";
+
 import styled from "styled-components";
-import { RequestState } from "store";
 
 const Home = () => {
   const [isToggled, setIsToggled] = useState(false);
@@ -15,6 +16,7 @@ const Home = () => {
 
   let filteredRequests = requests;
 
+  filteredRequests = [];
   const toggleCheckHandler = (isChecked: boolean) => {
     setIsToggled(!isChecked);
   };
