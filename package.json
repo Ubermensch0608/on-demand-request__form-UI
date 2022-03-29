@@ -32,8 +32,7 @@
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "cross-env NODE_PATH=src yarn run build",
-    "server": "json-server --watch server/data.json --port 3001"
+    "heroku-postbuild": "cross-env NODE_PATH=src yarn run build"
   },
   "eslintConfig": {
     "extends": "react-app"

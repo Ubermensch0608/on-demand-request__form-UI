@@ -13,7 +13,6 @@ const Requests: FC<{ requests: RequestState[] }> = ({ requests }) => {
     <S.RequestForms>
       {requests.map((request) => {
         const status = request.status;
-
         return (
           <S.RequestForm key={request.id}>
             <S.RequestCard>
