@@ -18,11 +18,8 @@ const FilterDropDown = () => {
   const materialList = useAppSelector((state) => state.filter.materialList);
 
   const methodCheckHandler = () => {
-    // setIsMaterialFocused(false);
-    // setIsMethodFocused((prev) => !prev);
-
-    const isFocused = methodBtnRef.current?.onfocus;
-    console.log(isFocused);
+    setIsMaterialFocused(false);
+    setIsMethodFocused((prev) => !prev);
   };
 
   const materialCheckHandler = () => {

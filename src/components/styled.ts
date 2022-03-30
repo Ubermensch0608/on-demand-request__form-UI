@@ -9,7 +9,6 @@ export const HomeWrapper = styled.section`
   margin: 0 auto;
 
   @media (min-width: 1439px) {
-    max-width: max-content;
   }
 `;
 

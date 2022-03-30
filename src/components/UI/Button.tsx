@@ -5,11 +5,23 @@ export interface ButtonProps {
   theme: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   btnRef?: React.Ref<HTMLButtonElement>;
+  onFocus?: React.FocusEventHandler<HTMLButtonElement>;
 }
 
-const Button: FC<ButtonProps> = ({ children, theme, onClick, btnRef }) => {
+const Button: FC<ButtonProps> = ({
+  children,
+  theme,
+  onClick,
+  btnRef,
+  onFocus,
+}) => {
   return (
-    <StyledButton onClick={onClick} ref={btnRef} theme={theme}>
+    <StyledButton
+      onFocus={onFocus}
+      onClick={onClick}
+      ref={btnRef}
+      theme={theme}
+    >
       {children}
     </StyledButton>
   );
