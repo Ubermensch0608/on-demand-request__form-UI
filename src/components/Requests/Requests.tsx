@@ -5,14 +5,30 @@ import { Button } from "components/UI";
 import * as S from "./styled";
 
 const Requests: FC<{ requests: RequestState[] }> = ({ requests }) => {
+  const createCommaHandler = (arr: string[]) => {
+    const fixedArr: string[] = [];
+
+    for (let i = 0; i < arr.length; i++) {
+      if (i % 2 === 0 && i < arr.length - 1) {
+        const returnValue = arr[i].replace(arr[i], arr[i] + ",");
+        fixedArr.push(returnValue);
+      } else {
+        const returnValue = arr[i].replace(arr[i], " " + arr[i]);
+        fixedArr.push(returnValue);
+      }
+    }
+    return fixedArr;
+  };
+
   if (requests.length === 0) {
     return <S.NoRequestBox>조건에 맞는 요청이 없습니다.</S.NoRequestBox>;
   }
 
   return (
     <S.RequestForms>
-      {requests.map((request) => {
+      {requests.map((request, i) => {
         const status = request.status;
+
         return (
           <S.RequestForm key={request.id}>
             <S.RequestCard>
@@ -38,11 +54,11 @@ const Requests: FC<{ requests: RequestState[] }> = ({ requests }) => {
                   </S.RequestInfo>
                   <S.RequestInfo>
                     <td>가공방식</td>
-                    <td>{request.method}</td>
+                    <td>{createCommaHandler(request.method)}</td>
                   </S.RequestInfo>
                   <S.RequestInfo>
                     <td>재료</td>
-                    <td>{request.material}</td>
+                    <td>{createCommaHandler(request.material)}</td>
                   </S.RequestInfo>
                 </tbody>
               </S.RequetInnerBottom>

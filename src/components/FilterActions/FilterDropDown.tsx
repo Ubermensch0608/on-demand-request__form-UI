@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 
 import { checkfilterActions } from "store";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -17,7 +17,7 @@ const FilterDropDown = () => {
   const methodList = useAppSelector((state) => state.filter.methodList);
   const materialList = useAppSelector((state) => state.filter.materialList);
 
-  const methodCheckHandler = () => {
+  const methodCheckHandler = (event: React.MouseEvent) => {
     setIsMaterialFocused(false);
     setIsMethodFocused((prev) => !prev);
   };
