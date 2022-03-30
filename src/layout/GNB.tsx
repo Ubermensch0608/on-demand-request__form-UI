@@ -44,7 +44,7 @@ const GNB = () => {
             </div>
             <div>
               <span>A 가공 업체</span>
-              <span> </span>
+              <span />
               <span>로그아웃</span>
             </div>
           </NavRightContents>
@@ -123,14 +123,21 @@ export const NavRightContents = styled.div`
     margin-right: 8px;
   }
 
+  > div:nth-child(2) {
+    display: flex;
+    align-items: center;
+  }
+
   > div > span {
     cursor: pointer;
 
     :nth-child(2) {
-      content: " ";
+      display: inline-block;
+      content: "";
       cursor: none;
       background-color: #fff;
-      width: 1px;
+      margin: 0 32px;
+      width: 1.5px;
       height: 16px;
     }
   }

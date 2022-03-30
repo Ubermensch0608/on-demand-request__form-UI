@@ -8,6 +8,7 @@ import { DUMMY_MATERIAL, DUMMY_METHOD } from "common/dummy-data";
 import RefreshIcon from "assets/img/refresh_24px.png";
 import ArrowDownIcon from "assets/img/arrow_drop_down_24px.png";
 import * as S from "./styled/filter-drop-down";
+import DropDownOption from "./DropDownOption";
 
 const FilterDropDown = () => {
   const dispatch = useAppDispatch();
@@ -65,19 +66,13 @@ const FilterDropDown = () => {
         {isMethodFocused && (
           <S.DropDownWrapper>
             {DUMMY_METHOD.map((item) => (
-              <li key={item.id}>
-                <input
-                  id={item.id}
-                  type="checkbox"
-                  value={item.method}
-                  onChange={countCheckHandler}
-                  checked={
-                    item.method ===
-                    methodList.find((check) => check === item.method)
-                  }
-                />
-                <label htmlFor={item.id}>{item.method}</label>
-              </li>
+              <DropDownOption
+                key={item.id}
+                id={item.id}
+                method={item.method}
+                methodList={methodList}
+                onChange={countCheckHandler}
+              />
             ))}
           </S.DropDownWrapper>
         )}
@@ -101,19 +96,13 @@ const FilterDropDown = () => {
         {isMaterialFocused && (
           <S.DropDownWrapper>
             {DUMMY_MATERIAL.map((item) => (
-              <li key={item.id}>
-                <input
-                  id={item.id}
-                  type="checkbox"
-                  onChange={countCheckHandler}
-                  value={item.material}
-                  checked={
-                    item.material ===
-                    materialList.find((check) => check === item.material)
-                  }
-                />
-                <label htmlFor={item.id}>{item.material}</label>
-              </li>
+              <DropDownOption
+                key={item.id}
+                id={item.id}
+                method={item.material}
+                methodList={materialList}
+                onChange={countCheckHandler}
+              />
             ))}
           </S.DropDownWrapper>
         )}
