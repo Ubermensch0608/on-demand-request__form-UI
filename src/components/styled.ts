@@ -15,7 +15,7 @@ export const HomeWrapper = styled.section`
 export const InnerContents = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 110px 120px;
+  margin: 110px 10vw;
 
   @media (max-width: 767px) {
     margin: 76px 20px 38px 20px;

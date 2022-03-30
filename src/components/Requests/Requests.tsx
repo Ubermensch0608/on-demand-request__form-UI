@@ -25,7 +25,7 @@ const Requests: FC<{ requests: RequestState[] }> = ({ requests }) => {
   }
 
   return (
-    <S.RequestForms>
+    <S.RequestsForm>
       {requests.map((request, i) => {
         const status = request.status;
 
@@ -46,11 +46,11 @@ const Requests: FC<{ requests: RequestState[] }> = ({ requests }) => {
                 <tbody>
                   <S.RequestInfo>
                     <td>도면개수</td>
-                    <td>{request.count}</td>
+                    <td>{request.count}개</td>
                   </S.RequestInfo>
                   <S.RequestInfo>
                     <td>총 수량</td>
-                    <td>{request.amount}</td>
+                    <td>{request.amount}개</td>
                   </S.RequestInfo>
                   <S.RequestInfo>
                     <td>가공방식</td>
@@ -70,7 +70,7 @@ const Requests: FC<{ requests: RequestState[] }> = ({ requests }) => {
           </S.RequestForm>
         );
       })}
-    </S.RequestForms>
+    </S.RequestsForm>
   );
 };
 

@@ -1,13 +1,21 @@
 import { Card } from "components/UI/Card";
 import styled from "styled-components";
 
-export const RequestForms = styled.ul`
+export const RequestsForm = styled.ul`
   display: flex;
   flex-wrap: wrap;
   align-content: flex-end;
   justify-content: flex-start;
-  width: 100%;
+  width: 1250px;
   margin: 0 auto;
+
+  @media (max-width: 1300px) {
+    width: 835px;
+    margin: 0;
+  }
+  @media (max-width: 768px) {
+    width: 416px;
+  }
 `;
 
 export const RequestForm = styled.li`
@@ -26,9 +34,14 @@ export const ButtonActions = styled.div`
 export const RequestCard = styled(Card)`
   display: flex;
   width: 366px;
-  height: fit-content;
+  height: 356px;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 767px) {
+    width: 320px;
+    height: 344px;
+  }
 `;
 
 export const RequetInnerTop = styled.div`
@@ -71,10 +84,12 @@ export const RequestInfo = styled.tr`
   font-size: 14px;
   line-height: 20px;
   color: #323d45;
+  width: 100%;
 
   > td:nth-child(1) {
     font-weight: 400;
     padding-bottom: 8px;
+    width: 100px !important;
   }
   > td:nth-child(2) {
     font-weight: 700;

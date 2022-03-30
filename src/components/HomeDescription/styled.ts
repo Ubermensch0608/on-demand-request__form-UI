@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const HomeDesc = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 1250px;
+  margin: 0 auto;
   margin-bottom: 32px;
 
   > h3 {

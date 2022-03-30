@@ -4,11 +4,17 @@ import styled from "styled-components";
 export const FiltersWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 32px 0;
+  margin: 32px auto;
+  width: 1250px;
+
+  @media (max-width: 1300px) {
+    width: 100%;
+    margin: 32px 0;
+  }
 
   @media (max-width: 767px) {
     flex-direction: column;
-
+    width: 416px;
     > div:nth-child(1) {
       margin-bottom: 10px;
     }
