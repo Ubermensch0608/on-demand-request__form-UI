@@ -7,6 +7,7 @@ export const HomeWrapper = styled.section`
   z-index: 99;
   width: 100%;
   margin: 0 auto;
+  overflow-x: hidden;
 
   @media (min-width: 1439px) {
   }

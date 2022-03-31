@@ -40,7 +40,7 @@ export const BackDrop = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: 1000;
   background: rgba(0, 0, 0, 0.75);
 `;
 
@@ -58,7 +58,7 @@ const Modal: FC<{ onModal: React.MouseEventHandler }> = ({ onModal }) => {
 
 export const ModalWrapper = styled.div`
   position: fixed;
-  width: 80%;
+  width: 40%;
   height: 100%;
   z-index: 10000;
   background-color: #fff;
