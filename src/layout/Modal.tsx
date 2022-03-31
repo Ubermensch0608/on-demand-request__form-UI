@@ -58,7 +58,7 @@ const Modal: FC<{ onModal: React.MouseEventHandler }> = ({ onModal }) => {
 
 export const ModalWrapper = styled.div`
   position: fixed;
-  width: 40%;
+  width: 70%;
   height: 100%;
   z-index: 10000;
   background-color: #fff;
