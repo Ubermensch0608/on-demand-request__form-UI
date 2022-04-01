@@ -34,11 +34,13 @@ export const requestSlice = createSlice({
 export interface checkFilterState {
   methodList: string[];
   materialList: string[];
+  isOpen: { method: boolean; material: boolean };
 }
 
 const checkFilterInitialState: checkFilterState = {
   methodList: [],
   materialList: [],
+  isOpen: { method: false, material: false },
 };
 
 export const checkFilterSlice = createSlice({
@@ -70,6 +72,12 @@ export const checkFilterSlice = createSlice({
     reset: (state) => {
       state.methodList = [];
       state.materialList = [];
+    },
+    isOpen: (
+      state,
+      action: PayloadAction<{ method: boolean; material: boolean }>
+    ) => {
+      state.isOpen = action.payload;
     },
   },
 });

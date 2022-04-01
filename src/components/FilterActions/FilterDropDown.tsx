@@ -1,4 +1,11 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, {
+  ChangeEvent,
+  MouseEvent,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { checkfilterActions } from "store";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -9,24 +16,16 @@ import RefreshIcon from "assets/img/refresh_24px.png";
 import ArrowDownIcon from "assets/img/arrow_drop_down_24px.png";
 import * as S from "./styled/filter-drop-down";
 import DropDownOption from "./DropDownOption";
+import { isCallExpression, Node } from "typescript";
 
 const FilterDropDown = () => {
   const dispatch = useAppDispatch();
-  const methodBtnRef = useRef<HTMLButtonElement>(null);
-  const [isMethodFocused, setIsMethodFocused] = useState(false);
-  const [isMaterialFocused, setIsMaterialFocused] = useState(false);
+  const methodAreaRef = useRef<HTMLSpanElement>(null);
+  const materialAreaRef = useRef<HTMLSpanElement>(null);
+
   const methodList = useAppSelector((state) => state.filter.methodList);
   const materialList = useAppSelector((state) => state.filter.materialList);
-
-  const methodCheckHandler = (event: React.MouseEvent) => {
-    setIsMaterialFocused(false);
-    setIsMethodFocused((prev) => !prev);
-  };
-
-  const materialCheckHandler = () => {
-    setIsMethodFocused(false);
-    setIsMaterialFocused((prev) => !prev);
-  };
+  const isCheckBoxOpened = useAppSelector((state) => state.filter.isOpen);
 
   const countCheckHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const currentisChecked = event.target.checked;
@@ -43,14 +42,88 @@ const FilterDropDown = () => {
     dispatch(checkfilterActions.reset());
   };
 
+  const methodCheckHandler = (event: any) => {
+    if (
+      methodAreaRef.current &&
+      methodAreaRef!.current!.contains(event.target)
+    ) {
+      console.log("method-open");
+      dispatch(
+        checkfilterActions.isOpen({
+          method: true,
+          material: false,
+        })
+      );
+    } else if (
+      methodAreaRef.current &&
+      !methodAreaRef!.current!.contains(event.target)
+    ) {
+      console.log("method-close");
+      dispatch(
+        checkfilterActions.isOpen({
+          method: false,
+          material: false,
+        })
+      );
+    }
+
+    if (
+      materialAreaRef.current &&
+      materialAreaRef!.current!.contains(event.target)
+    ) {
+      console.log("material-open");
+      dispatch(
+        checkfilterActions.isOpen({
+          method: false,
+          material: true,
+        })
+      );
+    } else if (
+      !materialAreaRef.current &&
+      materialAreaRef!.current!.contains(event.target)
+    ) {
+      console.log("material-close");
+      dispatch(
+        checkfilterActions.isOpen({
+          method: false,
+          material: false,
+        })
+      );
+    }
+  };
+
+  const materialCheckHandler = (event: any) => {
+    if (materialAreaRef && materialAreaRef!.current!.contains(event.target)) {
+      console.log("You clicked inside of me!");
+      dispatch(
+        checkfilterActions.isOpen({
+          method: isCheckBoxOpened.method,
+          material: true,
+        })
+      );
+    } else {
+      console.log("You clicked outside of me!");
+      dispatch(
+        checkfilterActions.isOpen({
+          method: isCheckBoxOpened.method,
+          material: false,
+        })
+      );
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", methodCheckHandler);
+
+    return () => {
+      document.removeEventListener("mousedown", methodCheckHandler);
+    };
+  }, []);
+
   return (
     <S.FilterWrapper>
-      <span>
-        <Button
-          theme="clear"
-          onClick={methodCheckHandler}
-          btnRef={methodBtnRef}
-        >
+      <span id="method" ref={methodAreaRef}>
+        <Button theme="clear">
           <S.ButtonInner>
             <span>가공방식</span>
             <span>
@@ -63,7 +136,7 @@ const FilterDropDown = () => {
             </span>
           </S.ButtonInner>
         </Button>
-        {isMethodFocused && (
+        {isCheckBoxOpened.method && (
           <S.DropDownWrapper>
             {DUMMY_METHOD.map((item) => (
               <DropDownOption
@@ -77,8 +150,8 @@ const FilterDropDown = () => {
           </S.DropDownWrapper>
         )}
       </span>
-      <span>
-        <Button theme="clear" onClick={materialCheckHandler}>
+      <span id="material" ref={materialAreaRef}>
+        <Button theme="clear">
           <S.ButtonInner>
             <span>
               재료{materialList.length > 0 && "(" + materialList.length + ")"}
@@ -93,7 +166,7 @@ const FilterDropDown = () => {
             </span>
           </S.ButtonInner>
         </Button>
-        {isMaterialFocused && (
+        {isCheckBoxOpened.material && (
           <S.DropDownWrapper>
             {DUMMY_MATERIAL.map((item) => (
               <DropDownOption

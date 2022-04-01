@@ -2,26 +2,15 @@ import React, { FC } from "react";
 import styled, { css } from "styled-components";
 
 export interface ButtonProps {
+  id?: string;
   theme: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
   btnRef?: React.Ref<HTMLButtonElement>;
-  onFocus?: React.FocusEventHandler<HTMLButtonElement>;
 }
 
-const Button: FC<ButtonProps> = ({
-  children,
-  theme,
-  onClick,
-  btnRef,
-  onFocus,
-}) => {
+const Button: FC<ButtonProps> = ({ id, children, theme, onClick, btnRef }) => {
   return (
-    <StyledButton
-      onFocus={onFocus}
-      onClick={onClick}
-      ref={btnRef}
-      theme={theme}
-    >
+    <StyledButton id={id} onClick={onClick} ref={btnRef} theme={theme}>
       {children}
     </StyledButton>
   );

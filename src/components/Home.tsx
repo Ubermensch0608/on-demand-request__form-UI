@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { RequestState } from "store";
-import { useAppSelector } from "store/hooks";
+import { checkfilterActions, RequestState } from "store";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import FilterActions from "./FilterActions/FilterActions";
 
 import HomeDescription from "./HomeDescription/HomeDescription";
@@ -9,6 +9,7 @@ import Requests from "./Requests/Requests";
 import * as S from "./styled";
 
 const Home = () => {
+  const dispatch = useAppDispatch();
   const [isToggled, setIsToggled] = useState(false);
   const methodList = useAppSelector((state) => state.filter.methodList);
   const materialList = useAppSelector((state) => state.filter.materialList);
