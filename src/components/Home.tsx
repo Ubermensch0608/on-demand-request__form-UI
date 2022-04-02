@@ -9,7 +9,6 @@ import Requests from "./Requests/Requests";
 import * as S from "./styled";
 
 const Home = () => {
-  const dispatch = useAppDispatch();
   const [isToggled, setIsToggled] = useState(false);
   const methodList = useAppSelector((state) => state.filter.methodList);
   const materialList = useAppSelector((state) => state.filter.materialList);

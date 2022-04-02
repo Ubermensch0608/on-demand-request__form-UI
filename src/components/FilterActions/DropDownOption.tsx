@@ -19,12 +19,15 @@ const DropDownOption: FC<DropDownOptionProps> = ({
   return (
     <Option id={id} onClick={onClick}>
       <input
+        id={`${id} drop-down`}
         type="checkbox"
         value={method}
         onChange={onChange}
         checked={method === methodList.find((check) => check === method)}
       />
-      <label htmlFor={id}>{method}</label>
+      <label id={id} htmlFor={`${id} drop-down`}>
+        {method}
+      </label>
     </Option>
   );
 };

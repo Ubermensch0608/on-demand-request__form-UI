@@ -46,7 +46,7 @@ const FilterDropDown = () => {
     dispatch(checkfilterActions.reset());
   };
 
-  const methodOpenHandler = (event: React.MouseEvent) => {
+  const methodOpenHandler = (event: React.MouseEvent<HTMLElement>) => {
     const targetId = event.currentTarget.id;
 
     if (targetId.includes("button")) {
@@ -58,14 +58,27 @@ const FilterDropDown = () => {
     }
   };
 
-  const globalClickHandler = (event: any) => {
-    console.dir(event.target);
-    const dropDownButton = event.target.id.includes("button");
-    const dropDownOption = event.target.id.includes("option");
+  const materialOpenHandler = (event: React.MouseEvent<HTMLElement>) => {
+    const targetId = event.currentTarget.id;
 
-    if (!(dropDownButton || dropDownOption)) {
-      console.log("close");
-      // dispatch(dropDownActions.method(false));
+    if (targetId.includes("button")) {
+      if (!isMaterialOpen) {
+        dispatch(dropDownActions.material(true));
+      } else if (isMaterialOpen) {
+        dispatch(dropDownActions.material(false));
+      }
+    }
+  };
+
+  const globalClickHandler = (event: any) => {
+    const targetId = event.target.id;
+
+    if (!targetId.includes("method")) {
+      dispatch(dropDownActions.method(false));
+    }
+
+    if (!targetId.includes("material")) {
+      dispatch(dropDownActions.material(false));
     }
   };
 
@@ -81,10 +94,11 @@ const FilterDropDown = () => {
     <S.FilterWrapper>
       <span>
         <Button id="method button" theme="clear" onClick={methodOpenHandler}>
-          <S.ButtonInner>
-            <span>가공방식</span>
-            <span>
+          <S.ButtonInner id="method button">
+            <span id="method button">가공방식</span>
+            <span id="method button">
               <img
+                id="method button"
                 src={ArrowDownIcon}
                 alt="arrow-down-icon"
                 width={10}
@@ -94,7 +108,7 @@ const FilterDropDown = () => {
           </S.ButtonInner>
         </Button>
         {isMethodOpen && (
-          <S.DropDownWrapper id="method option" onClick={methodOpenHandler}>
+          <S.DropDownWrapper id="method option">
             {DUMMY_METHOD.map((item) => (
               <DropDownOption
                 key={item.id}
@@ -107,14 +121,19 @@ const FilterDropDown = () => {
           </S.DropDownWrapper>
         )}
       </span>
-      <span id="material" ref={materialAreaRef}>
-        <Button theme="clear">
-          <S.ButtonInner>
-            <span>
+      <span id="material button" ref={materialAreaRef}>
+        <Button
+          id="material button"
+          theme="clear"
+          onClick={materialOpenHandler}
+        >
+          <S.ButtonInner id="material button">
+            <span id="material button">
               재료{materialList.length > 0 && "(" + materialList.length + ")"}
             </span>
-            <span>
+            <span id="material button">
               <img
+                id="material button"
                 src={ArrowDownIcon}
                 alt="arrow-down-icon"
                 width={10}
