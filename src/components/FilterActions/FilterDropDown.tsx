@@ -7,16 +7,16 @@ import React, {
   useState,
 } from "react";
 
-import { checkfilterActions } from "store";
+import { checkfilterActions, dropDownActions } from "store";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { Button } from "components/UI";
+
 import { DUMMY_MATERIAL, DUMMY_METHOD } from "common/dummy-data";
+import DropDownOption from "./DropDownOption";
+import { Button } from "components/UI";
 
 import RefreshIcon from "assets/img/refresh_24px.png";
 import ArrowDownIcon from "assets/img/arrow_drop_down_24px.png";
 import * as S from "./styled/filter-drop-down";
-import DropDownOption from "./DropDownOption";
-import { isCallExpression, Node } from "typescript";
 
 const FilterDropDown = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +25,11 @@ const FilterDropDown = () => {
 
   const methodList = useAppSelector((state) => state.filter.methodList);
   const materialList = useAppSelector((state) => state.filter.materialList);
-  const isCheckBoxOpened = useAppSelector((state) => state.filter.isOpen);
+
+  const isMethodOpen = useAppSelector((state) => state.dropdown.isMethodOpen);
+  const isMaterialOpen = useAppSelector(
+    (state) => state.dropdown.isMaterialOpen
+  );
 
   const countCheckHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const currentisChecked = event.target.checked;
@@ -42,88 +46,41 @@ const FilterDropDown = () => {
     dispatch(checkfilterActions.reset());
   };
 
-  const methodCheckHandler = (event: any) => {
-    if (
-      methodAreaRef.current &&
-      methodAreaRef!.current!.contains(event.target)
-    ) {
-      console.log("method-open");
-      dispatch(
-        checkfilterActions.isOpen({
-          method: true,
-          material: false,
-        })
-      );
-    } else if (
-      methodAreaRef.current &&
-      !methodAreaRef!.current!.contains(event.target)
-    ) {
-      console.log("method-close");
-      dispatch(
-        checkfilterActions.isOpen({
-          method: false,
-          material: false,
-        })
-      );
-    }
+  const methodOpenHandler = (event: React.MouseEvent) => {
+    const targetId = event.currentTarget.id;
 
-    if (
-      materialAreaRef.current &&
-      materialAreaRef!.current!.contains(event.target)
-    ) {
-      console.log("material-open");
-      dispatch(
-        checkfilterActions.isOpen({
-          method: false,
-          material: true,
-        })
-      );
-    } else if (
-      !materialAreaRef.current &&
-      materialAreaRef!.current!.contains(event.target)
-    ) {
-      console.log("material-close");
-      dispatch(
-        checkfilterActions.isOpen({
-          method: false,
-          material: false,
-        })
-      );
+    if (targetId.includes("button")) {
+      if (!isMethodOpen) {
+        dispatch(dropDownActions.method(true));
+      } else if (isMethodOpen) {
+        dispatch(dropDownActions.method(false));
+      }
     }
   };
 
-  const materialCheckHandler = (event: any) => {
-    if (materialAreaRef && materialAreaRef!.current!.contains(event.target)) {
-      console.log("You clicked inside of me!");
-      dispatch(
-        checkfilterActions.isOpen({
-          method: isCheckBoxOpened.method,
-          material: true,
-        })
-      );
-    } else {
-      console.log("You clicked outside of me!");
-      dispatch(
-        checkfilterActions.isOpen({
-          method: isCheckBoxOpened.method,
-          material: false,
-        })
-      );
+  const globalClickHandler = (event: any) => {
+    console.dir(event.target);
+    const dropDownButton = event.target.id.includes("button");
+    const dropDownOption = event.target.id.includes("option");
+
+    if (!(dropDownButton || dropDownOption)) {
+      console.log("close");
+      // dispatch(dropDownActions.method(false));
     }
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", methodCheckHandler);
+    document.addEventListener("click", globalClickHandler);
 
     return () => {
-      document.removeEventListener("mousedown", methodCheckHandler);
+      document.removeEventListener("click", globalClickHandler);
     };
   }, []);
 
   return (
     <S.FilterWrapper>
-      <span id="method" ref={methodAreaRef}>
-        <Button theme="clear">
+      <span>
+        <Button id="method button" theme="clear" onClick={methodOpenHandler}>
           <S.ButtonInner>
             <span>가공방식</span>
             <span>
@@ -136,8 +93,8 @@ const FilterDropDown = () => {
             </span>
           </S.ButtonInner>
         </Button>
-        {isCheckBoxOpened.method && (
-          <S.DropDownWrapper>
+        {isMethodOpen && (
+          <S.DropDownWrapper id="method option" onClick={methodOpenHandler}>
             {DUMMY_METHOD.map((item) => (
               <DropDownOption
                 key={item.id}
@@ -166,7 +123,7 @@ const FilterDropDown = () => {
             </span>
           </S.ButtonInner>
         </Button>
-        {isCheckBoxOpened.material && (
+        {isMaterialOpen && (
           <S.DropDownWrapper>
             {DUMMY_MATERIAL.map((item) => (
               <DropDownOption

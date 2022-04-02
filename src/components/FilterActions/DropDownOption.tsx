@@ -6,6 +6,7 @@ interface DropDownOptionProps {
   method: string;
   methodList: string[];
   onChange: React.ChangeEventHandler;
+  onClick?: React.MouseEventHandler;
 }
 
 const DropDownOption: FC<DropDownOptionProps> = ({
@@ -13,11 +14,11 @@ const DropDownOption: FC<DropDownOptionProps> = ({
   method,
   methodList,
   onChange,
+  onClick,
 }) => {
   return (
-    <Option>
+    <Option id={id} onClick={onClick}>
       <input
-        id={id}
         type="checkbox"
         value={method}
         onChange={onChange}

@@ -73,14 +73,32 @@ export const checkFilterSlice = createSlice({
       state.methodList = [];
       state.materialList = [];
     },
-    isOpen: (
-      state,
-      action: PayloadAction<{ method: boolean; material: boolean }>
-    ) => {
-      state.isOpen = action.payload;
+  },
+});
+
+interface DropDownState {
+  isMethodOpen: boolean;
+  isMaterialOpen: boolean;
+}
+
+const dropDownInitialState: DropDownState = {
+  isMethodOpen: false,
+  isMaterialOpen: false,
+};
+
+export const dropDownSlice = createSlice({
+  name: "dropdown_option",
+  initialState: dropDownInitialState,
+  reducers: {
+    method: (state, action: PayloadAction<boolean>) => {
+      state.isMethodOpen = action.payload;
+    },
+    material: (state, action: PayloadAction<boolean>) => {
+      state.isMaterialOpen = action.payload;
     },
   },
 });
 
 export const requestsActions = requestSlice.actions;
 export const checkfilterActions = checkFilterSlice.actions;
+export const dropDownActions = dropDownSlice.actions;
