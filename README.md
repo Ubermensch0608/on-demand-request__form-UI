@@ -1,7 +1,5 @@
 # 사용자를 위한 요청서 관리 서비스
 
-## 서비스 링크: <a href='https://request-form-rewind-2.herokuapp.com/'>요청서 필터링 웹 링크</a>
-
 **preview**
 ![ateam-ventures-main](https://user-images.githubusercontent.com/93258739/160883143-a4ddb310-0a91-4e74-92de-ee59f506b76c.png)
 
